@@ -10,22 +10,18 @@ function App() {
   const [ loading, setLoading ] = useState(false);
   const [ error, setError ] = useState(false);
 
-  const URLS = {
-    USERS: 'https://jsonplaceholder.typicode.com/users',
-    POSTS: 'https://jsonplaceholder.typicode.com/posts',
-    COMMENTS: 'https://jsonplaceholder.typicode.com/comments'
-  }
+  const URL = 'https://jsonplaceholder.typicode.com';
 
   useEffect(() => {
-    handleFetch(URLS.USERS, 'users')
-  }, []);
+    handleFetch(tab)
+  }, [tab]);
 
-  const handleFetch = async (url, tabName) => {
+  const handleFetch = async (tabName) => {
     try {
       setError(false)
       setLoading(true)
 
-      const response = await fetch(url)
+      const response = await fetch(`${URL}/${tabName}`)
 
       if (!response.ok) throw Error('Smth went wrong') 
 
@@ -37,20 +33,6 @@ function App() {
     } finally {
       setLoading(false)
     }
-
-    setTab(tabName);
-  }
-
-  const handleUsers = async (value) => {
-   handleFetch(URLS.USERS, value)
-  }
-
-  const handlePosts = async (value) => {
-   handleFetch(URLS.POSTS, value)
-  }
-
-  const handleComments = async (value) => {
-   handleFetch(URLS.COMMENTS, value)
   }
 
   return (
@@ -59,17 +41,17 @@ function App() {
         <Tab
           value="users"
           tab={tab}
-          setTab={handleUsers}
+          setTab={setTab}
         />
         <Tab
           value="posts"
           tab={tab}
-          setTab={handlePosts}
+          setTab={setTab}
         />
         <Tab
           value="comments"
           tab={tab}
-          setTab={handleComments}
+          setTab={setTab}
         />
       </nav>     
 
