@@ -2,7 +2,7 @@ import { useState,useEffect } from "react";
 import Tab from "./components/Tab";
 import Error from "./components/Error";
 import Loading from "./components/Loading";
-import List from "./components/List";
+import Table from "./components/Table";
 
 function App() {
   const [ tab, setTab ] = useState('users');
@@ -55,12 +55,13 @@ function App() {
         />
       </nav>     
 
-      <div className="list-holder">
+      <div>
+        
         { error && <Error /> }
 
         { loading && <Loading /> }
 
-        { !error && !loading && <List list={list} /> }
+        { !error && !loading && <Table entries={list}/> }
       </div> 
     </div>
   );
